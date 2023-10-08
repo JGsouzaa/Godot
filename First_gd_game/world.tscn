@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bicnm4xqtjxvv"]
+[gd_scene load_steps=12 format=3 uid="uid://bicnm4xqtjxvv"]
 
 [ext_resource type="Texture2D" uid="uid://2e1sr04xyw42" path="res://sunny-land-phaser-project/sunny-land/assets/environment/tileset.png" id="1_636p3"]
 [ext_resource type="PackedScene" uid="uid://dh2lbc4rlke8b" path="res://Player/Player.tscn" id="1_hqcrp"]
 [ext_resource type="Script" path="res://bg.gd" id="1_wv0ji"]
 [ext_resource type="Texture2D" uid="uid://b41m4jrou5sft" path="res://sunny-land-phaser-project/sunny-land/assets/environment/back.png" id="2_neb2t"]
 [ext_resource type="PackedScene" uid="uid://dp3nerrjv62dw" path="res://Frog.tscn" id="5_pnpge"]
+[ext_resource type="PackedScene" uid="uid://bffo1dxf6fijp" path="res://Collectables/cherry.tscn" id="6_b0wmu"]
+[ext_resource type="Script" path="res://Collectables.gd" id="6_i2cti"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_asqch"]
 texture = ExtResource("1_636p3")
@@ -479,19 +481,19 @@ position = Vector2(363, 181)
 [node name="Mobs" type="Node" parent="."]
 
 [node name="Frog" parent="Mobs" instance=ExtResource("5_pnpge")]
-position = Vector2(212, 344)
+position = Vector2(991, 320)
 
 [node name="Frog2" parent="Mobs" instance=ExtResource("5_pnpge")]
-position = Vector2(521, 338)
+position = Vector2(1300, 314)
 
 [node name="Frog3" parent="Mobs" instance=ExtResource("5_pnpge")]
-position = Vector2(112, 333)
+position = Vector2(891, 309)
 
 [node name="Frog4" parent="Mobs" instance=ExtResource("5_pnpge")]
-position = Vector2(183, 323)
+position = Vector2(962, 299)
 
 [node name="Frog5" parent="Mobs" instance=ExtResource("5_pnpge")]
-position = Vector2(434, 326)
+position = Vector2(1213, 302)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -512,3 +514,15 @@ offset_bottom = 75.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 script = SubResource("GDScript_6kk72")
+
+[node name="Collectables" type="Node" parent="."]
+script = ExtResource("6_i2cti")
+
+[node name="Cherry" parent="Collectables" instance=ExtResource("6_b0wmu")]
+position = Vector2(151, 355)
+
+[node name="Timer" type="Timer" parent="Collectables"]
+wait_time = 0.192
+autostart = true
+
+[connection signal="timeout" from="Collectables/Timer" to="Collectables" method="_on_timer_timeout"]
